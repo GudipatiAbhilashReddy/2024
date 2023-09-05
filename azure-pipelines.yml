@@ -8,22 +8,22 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Towards-AzurePortal'
+    azureSubscription: 'Azure subscription 1 (9c34b185-c933-4327-b21e-543b6e8c06de)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      docker build -t mylabacr13.azurecr.io/web-game:tag 2048-game
-      az acr login -n mylabacr13
-      docker push mylabacr13.azurecr.io/web-game:tag
+      docker build -t createcontainerregistrys.azurecr.io/web-game:tag 2048-game
+      az acr login -n createcontainerregistrys
+      docker push createcontainerregistrys.azurecr.io/web-game:tag
 
 - script: cat 01_kubernetes_aks/app-deploy.yaml
 
 - task: Kubernetes@1
   inputs:
     connectionType: 'Azure Resource Manager'
-    azureSubscriptionEndpoint: 'Towards-AzurePortal'
-    azureResourceGroup: 'TestLab-RG'
-    kubernetesCluster: 'testlab-aks'
+    azureSubscriptionEndpoint: 'Azure subscription 1 (9c34b185-c933-4327-b21e-543b6e8c06de)'
+    azureResourceGroup: 'Create-a-resource-group'
+    kubernetesCluster: 'Create-Kubernetes-cluster'
     namespace: 'default'
     command: 'apply'
     useConfigurationFile: true
