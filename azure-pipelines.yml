@@ -12,9 +12,9 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      docker build -t createcontainerregistrys.azurecr.io/web-game:tag 2048-game
-      az acr login -n createcontainerregistrys
-      docker push createcontainerregistrys.azurecr.io/web-game:tag
+      docker build -t Rishicontainerregistry.azurecr.io/web-game:tag 2048-game
+      az acr login -n Rishicontainerregistry
+      docker push Rishicontainerregistry.azurecr.io/web-game:tag
 
 - script: cat 01_kubernetes_aks/app-deploy.yaml
 
@@ -22,8 +22,9 @@ steps:
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscriptionEndpoint: 'Azure subscription 1 (9c34b185-c933-4327-b21e-543b6e8c06de)'
-    azureResourceGroup: 'Create-a-resource-group'
-    kubernetesCluster: 'Create-Kubernetes-cluster'
+    azureResourceGroup: 'Abhilash'
+    kubernetesCluster: 'Kubernetescluster'
+    useClusterAdmin: true
     namespace: 'default'
     command: 'apply'
     useConfigurationFile: true
@@ -31,5 +32,5 @@ steps:
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
     azureSubscriptionEndpointForSecrets: 'Azure subscription 1 (9c34b185-c933-4327-b21e-543b6e8c06de)'
-    azureContainerRegistry: 'createcontainerregistrys.azurecr.io'
+    azureContainerRegistry: 'rishicontainerregistry.azurecr.io'
     forceUpdate: false
